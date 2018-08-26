@@ -3,19 +3,19 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.sonar.samples</groupId>
-	<artifactId>java-custom-rules-template</artifactId>
+	<groupId>cbp.bankware</groupId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>sonar-plugin</packaging>
 
 	<properties>
 		<sonar.version>5.6.3</sonar.version>
-		<java.plugin.version>4.2.1.6971</java.plugin.version>
+		<sonarjava.version>4.2.1.6971</sonarjava.version>
 		<sslr.version>1.21</sslr.version>
+		<gson.version>2.6.2</gson.version>
 	</properties>
 
-	<name>Java Custom Rules - Template</name>
-	<description>Empty Template for Custom Rules</description>
+	<name>CBP Standard Rules</name>
+	<description>CBP Coding Standard</description>
 
 	<dependencies>
 		<dependency>
@@ -29,14 +29,8 @@
 			<groupId>org.sonarsource.java</groupId>
 			<artifactId>sonar-java-plugin</artifactId>
 			<type>sonar-plugin</type>
-			<version>${java.plugin.version}</version>
+			<version>${sonarjava.version}</version>
 			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.sonarsource.java</groupId>
-			<artifactId>java-frontend</artifactId>
-			<version>${java.plugin.version}</version>
 		</dependency>
 
 		<dependency>
@@ -70,15 +64,33 @@
 		<dependency>
 			<groupId>org.sonarsource.java</groupId>
 			<artifactId>java-checks-testkit</artifactId>
-			<version>${java.plugin.version}</version>
-			
+			<version>${sonarjava.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.sonarsource.sslr</groupId>
 			<artifactId>sslr-testing-harness</artifactId>
 			<version>${sslr.version}</version>
-			
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
 		</dependency>
 
 		<dependency>
@@ -91,18 +103,19 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.easytesting</groupId>
-			<artifactId>fest-assert</artifactId>
-			<version>1.4</version>
-			
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.6.1</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>0.9.30</version>
-			
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -114,9 +127,9 @@
 				<version>1.17</version>
 				<extensions>true</extensions>
 				<configuration>
-					<pluginKey>java-template-custom</pluginKey>
-					<pluginName>Java Template Custom Rules</pluginName>
-					<pluginClass>org.sonar.template.java.JavaCustomRulesPlugin</pluginClass>
+					<pluginKey>cbp-standard-rules</pluginKey>
+					<pluginName>CBP Standard Rules</pluginName>
+					<pluginClass>cbp.bankware.standard.rules.CbpStandardRulesPlugin</pluginClass>
 					<sonarLintSupported>true</sonarLintSupported>
 					<sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
 				</configuration>
@@ -134,4 +147,5 @@
 		</plugins>
 	</build>
 
+	<artifactId>cbp-standard-rules</artifactId>
 </project>
